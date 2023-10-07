@@ -1,9 +1,10 @@
-import Image from 'next/image'
+import NavBar from "@/components/NavBar";
 
-export default function Home({data}) {
+export default function Home() {
   return (
     <div>
-      {console.log(JSON.stringify(data))}
+      <NavBar/>
+      {/* {console.log(JSON.stringify(data))}
       <h1>Random Data</h1>
       <ul>
         {data.map((item, index) => (
@@ -11,19 +12,19 @@ export default function Home({data}) {
             <h1>{item.name}</h1>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
 
-export async function getServerSideProps() {
-  // Fetch data from the separate API route
-  const response = await fetch('http://localhost:3000/api/hello');
-  const data = await response.json();
+// export async function getServerSideProps() {
+//   // Fetch data from the separate API route
+//   const response = await fetch('http://localhost:3000/api/hello');
+//   const data = await response.json();
 
-  return {
-    props: {
-      data,
-    },
-  };
-}
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
