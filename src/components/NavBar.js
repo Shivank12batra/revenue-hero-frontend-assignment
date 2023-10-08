@@ -13,7 +13,7 @@ const NavBar = () => {
     <nav className='bg-gray-100 w-100 py-4'>
         <div className='flex justify-between'>
             <div className='flex'>
-                <Image className='ml-4' src={koalaIcon} alt="koala" width={30} height={20}/>
+                <Image className='ml-4 cursor-pointer' src={koalaIcon} alt="koala" width={30} height={20}/>
                 <button className='flex md:hidden mt-2 ml-4'
                 onClick={() => setNavOpen(true)}>
                     <FontAwesomeIcon icon={faBars}/>
@@ -32,8 +32,8 @@ const NavBar = () => {
                     <FontAwesomeIcon className='mt-2' icon={faCog}/>
                 </button>
                 <button>
-                    <Image className='rounded-full' src={profilePic} alt='koala' width={30} height={20}/>
-                    <Image/>
+                    <Image className='rounded-full' src={profilePic} alt='koala' width={30}height={20}/>
+                    <Image/> 
                 </button>
             </div>
         </div>
