@@ -1,8 +1,9 @@
-// Function to generate random data
+import { faker } from '@faker-js/faker';
+
+// Function to generate random data for accounts dashboard
 export function generateRandomData() {
-    const names = ['John', 'Alice', 'Bob', 'Eve']; // Add more names as needed
-    const images = ['image1.jpg', 'image2.jpg', 'image3.jpg']; // Add more image URLs
-    const fits = ['A', 'B', 'C'];
+    const imageId = Math.floor(Math.random() * 1000);
+    const fits = ['A', 'B', 'C', 'D'];
     const intents = ['high', 'mid', 'low'];
     const lastSeen = Math.floor(Math.random() * 28) + 1;
     const sessionMins = Math.floor(Math.random() * 61);
@@ -10,15 +11,23 @@ export function generateRandomData() {
     const weeklyActivity = Array.from({ length: 7 }, () =>
       Math.floor(Math.random() * 61)
     );
+  
+    // Create the intentSignals array with random numbers
     const intentSignals = [
-      'Blog Readers',
-      'Content-Intent ebook',
-      'Pricing Page Visitors',
-    ]; // Add more options
+      {
+        'Blog Readers': lastSeen,
+      },
+      {
+        'Content-Intent ebook': Math.floor(Math.random() * 28) + 1,
+      },
+      {
+        'Pricing Page Visitors': Math.floor(Math.random() * 28) + 1,
+      },
+    ];
   
     return {
-      name: names[Math.floor(Math.random() * names.length)],
-      img: images[Math.floor(Math.random() * images.length)],
+      name: faker.company.name(),
+      img: `https://picsum.photos/300/200/?random=${imageId}`,
       fit: fits[Math.floor(Math.random() * fits.length)],
       intent: intents[Math.floor(Math.random() * intents.length)],
       lastSeen,

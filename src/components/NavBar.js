@@ -13,7 +13,7 @@ const NavBar = () => {
     <nav className='bg-gray-100 w-100 py-4'>
         <div className='flex justify-between'>
             <div className='flex'>
-                <Image className='ml-4 cursor-pointer' src={koalaIcon} alt="koala" width={30} height={20}/>
+                <Image className='ml-4 cursor-pointer' src={koalaIcon} alt="koala_icon" width={30} height={20}/>
                 <button className='flex md:hidden mt-2 ml-4'
                 onClick={() => setNavOpen(true)}>
                     <FontAwesomeIcon icon={faBars}/>
@@ -37,6 +37,7 @@ const NavBar = () => {
                 </button>
             </div>
         </div>
+        {/* mobile design when nav is open */}
         {navOpen ? 
         <div className='fixed inset-0 w-full h-full bg-white bg-opacity-500 z-100'>
             <button onClick={() => setNavOpen(false)}>
