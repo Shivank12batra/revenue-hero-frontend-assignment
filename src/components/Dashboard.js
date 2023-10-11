@@ -24,7 +24,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'name',
         Cell: ({ row }) => (
-          <div className='w-[400px] min-w-[300px] flex items-center ml-4'>
+          <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
               <Image className='rounded-lg' src={row.original.img} alt='Company Logo' width={60} height={40} />
             <div className='ml-2 text-left'>
                 <span className='text-sm font-semibold'>{row.original.name}</span>
