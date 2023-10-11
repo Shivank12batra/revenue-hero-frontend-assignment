@@ -24,7 +24,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'name',
         Cell: ({ row }) => (
-          <div className='flex items-center ml-4'>
+          <div className='w-[400px] min-w-[300px] flex items-center ml-4'>
               <Image className='rounded-lg' src={row.original.img} alt='Company Logo' width={60} height={40} />
             <div className='ml-2 text-left'>
                 <span className='text-sm font-semibold'>{row.original.name}</span>
@@ -40,7 +40,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'fit',
         Cell: ({ value }) => (
-          <div className='text-center text-sm font-bold uppercase' style={{'color' : `${fitColors[value]}`}}>
+          <div className='min-w-[50px] text-center text-sm font-bold uppercase' style={{'color' : `${fitColors[value]}`}}>
             {value}
           </div>
         ),
@@ -51,7 +51,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'intent',
         Cell: ({ value }) => (
-          <div className='text-center'>
+          <div className='min-w-[50px] text-center'>
             <IntentIndicators value={value}/>
           </div>
         ),
@@ -62,7 +62,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'lastSeen',
         Cell: ({ value }) => (
-          <div className='text-xs text-center'>{`${value} days ago`}</div>
+          <div className='min-w-[50px] text-xs text-center'>{`${value} days ago`}</div>
         ),
       },
       {
@@ -73,7 +73,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'sessionMins',
         Cell: ({ value, row }) => (
-          <div className='text-xs text-right mr-6'>
+          <div className='min-w-[75px] text-xs text-right mr-2'>
             {value} minutes
             <br />
             <span className='text-gray-400'>{row.original.sessionPages} pages</span>
@@ -82,13 +82,13 @@ const Dashboard = ({ data }) => {
       },
       {
         Header: (
-          <div className='text-gray-600 text-left uppercase'>
+          <div className='text-gray-600 text-left ml-2 uppercase'>
             Activity (Week)
           </div>
         ),
         accessor: 'weeklyActivity',
         Cell: ({ value }) => (
-          <div className='md:w-[8rem]'>
+          <div className=' ml-4 w-[150px]'>
             <ActivityGraph data={value}/>
           </div>
         ),
@@ -101,7 +101,7 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'intentSignals',
         Cell: ({ value }) => (
-            <div className='md:w-[14rem] h-full text-center'>
+            <div className='w-[250px] h-full text-center'>
                 {value.map((signal, idx) => (
                 <div key={idx} className='flex justify-between items-center py-1'>
                     <div className='flex items-center'>
@@ -152,13 +152,13 @@ const Dashboard = ({ data }) => {
           <FontAwesomeIcon className='ml-1 text-xs' icon={faChevronDown} />
         </button>
       </div>
-      <div className='md:overflow-x-hidden overflow'>
-        <table className='w-full text-xs border-collapse mt-4 ml-4' {...getTableProps()}>
+      <div className='md:overflow-x-hidden shrink-0'>
+        <table className='w-full table-auto text-xs border-collapse mt-4 ml-4 shrink-0' {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>
+                  <th {...column.getHeaderProps} className='border-b border-gray-200'>
                     {column.render('Header')}
                   </th>
                 ))}
@@ -169,9 +169,9 @@ const Dashboard = ({ data }) => {
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr  className='border-b border-gray-200' {...row.getRowProps}>
                   {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()} className='py-2'>
+                    <td className='py-2' {...cell.getCellProps()}>
                       {cell.render('Cell')}
                     </td>
                   ))}
