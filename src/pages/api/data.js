@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { generateRandomDataArray } from "@/randomData"
+import { generateRandomDataArray } from "@/randomData";
 
-export default (req, res) => {
+const handler = (req, res) => {
   try {
     // Generate and send data
     const data = generateRandomDataArray(25);
@@ -11,3 +11,6 @@ export default (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+export default handler;
+

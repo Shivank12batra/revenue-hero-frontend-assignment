@@ -115,7 +115,7 @@ const Dashboard = ({ data }) => {
         ),
       },
     ],
-    []
+    [data]
   );
   
 
@@ -152,33 +152,33 @@ const Dashboard = ({ data }) => {
           <FontAwesomeIcon className='ml-1 text-xs' icon={faChevronDown} />
         </button>
       </div>
-      <div className='md:overflow-x-hidden shrink-0'>
-        <table className='w-full table-auto text-xs border-collapse mt-4 ml-4 shrink-0' {...getTableProps()}>
-          <thead>
+      <div className='md:overflow-x-hidden overflow-x-auto'>
+        <table className='w-full table-auto text-xs border-collapse mt-4 ml-4' {...getTableProps()}>
+            <thead>
             {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
+                <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps} className='border-b border-gray-200'>
+                    <th key={column.id} {...column.getHeaderProps()} className='border-b border-gray-200'>
                     {column.render('Header')}
-                  </th>
+                    </th>
                 ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr  className='border-b border-gray-200' {...row.getRowProps}>
-                  {row.cells.map((cell) => (
-                    <td className='py-2' {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </td>
-                  ))}
                 </tr>
-              );
+            ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+                prepareRow(row);
+                return (
+                <tr key={row.id} className='border-b border-gray-200' {...row.getRowProps()}>
+                    {row.cells.map((cell) => (
+                    <td key={cell.column.id} className='py-2' {...cell.getCellProps()}>
+                        {cell.render('Cell')}
+                    </td>
+                    ))}
+                </tr>
+                );
             })}
-          </tbody>
+            </tbody>
         </table>
       </div>
     </main>

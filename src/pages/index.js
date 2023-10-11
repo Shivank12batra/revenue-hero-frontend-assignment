@@ -13,7 +13,7 @@ export default function Home({data}) {
 
 export async function getServerSideProps() {
   // Fetch data from the separate API route
-  const response = await fetch('http://localhost:3000/api/hello');
+  const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
   const data = await response.json();
 
   return {
