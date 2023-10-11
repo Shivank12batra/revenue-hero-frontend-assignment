@@ -1,13 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { generateRandomData } from "@/randomData"
-
-function generateRandomDataArray(count) {
-  const randomDataArray = [];
-  for (let i = 0; i < count; i++) {
-    randomDataArray.push(generateRandomData());
-  }
-  return randomDataArray;
-}
+import { generateRandomDataArray } from "@/randomData"
 
 export default (req, res) => {
   try {

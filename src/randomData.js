@@ -40,3 +40,11 @@ export function generateRandomData() {
       ),
     };
   }
+
+  export function generateRandomDataArray(count) {
+    const randomDataArray = [];
+    for (let i = 0; i < count; i++) {
+      randomDataArray.push(generateRandomData());
+    }
+    return randomDataArray;
+  }

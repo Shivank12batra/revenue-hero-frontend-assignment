@@ -32,8 +32,7 @@ const NavBar = () => {
                     <FontAwesomeIcon className='mt-2' icon={faCog}/>
                 </button>
                 <button>
-                    <Image className='rounded-full' src={profilePic} alt='koala' width={30}height={20}/>
-                    <Image/> 
+                    <Image className='rounded-full' src={profilePic} alt='profile_pic' width={30}height={20}/>
                 </button>
             </div>
         </div>
