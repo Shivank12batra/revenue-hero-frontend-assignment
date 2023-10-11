@@ -13,9 +13,12 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "chart.js": "^4.4.0",
     "next": "13.5.4",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
+    "react-simple-charts": "^0.0.19",
     "react-table": "^7.8.0"
   },
   "devDependencies": {

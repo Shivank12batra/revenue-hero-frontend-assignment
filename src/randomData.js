@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 // Function to generate random data for accounts dashboard
 export function generateRandomData() {
     const imageId = Math.floor(Math.random() * 1000);
-    const fits = ['A', 'B', 'C', 'D'];
+    const fits = ['a', 'b', 'c', 'd'];
     const intents = ['high', 'mid', 'low'];
     const lastSeen = Math.floor(Math.random() * 28) + 1;
     const sessionMins = Math.floor(Math.random() * 61);

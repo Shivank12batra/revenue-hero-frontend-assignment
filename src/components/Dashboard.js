@@ -1,4 +1,6 @@
 import React from 'react';
+import IntentIndicators from './IntentIndicators';
+import ActivityGraph from './ActivityGraph';
 import { useTable } from 'react-table';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,10 +8,10 @@ import { faBuilding, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = ({ data }) => {
   const fitColors = {
-    A: 'purple',
-    B: 'blue',
-    C: 'yellow',
-    D: 'red',
+    a: '#5E02F5',
+    b: '#8952E3',
+    c: '#C6D82C',
+    d: '#D04A65',
   };
 
   const columns = React.useMemo(
@@ -34,11 +36,11 @@ const Dashboard = ({ data }) => {
       },
       {
         Header: (
-          <div className='text-gray-600 uppercase text-center'>Fit</div>
+          <div className='text-gray-600 uppercase text-center mx-4'>Fit</div>
         ),
         accessor: 'fit',
         Cell: ({ value }) => (
-          <div className={`text-center text-${fitColors[value]}-500 uppercase`}>
+          <div className='text-center text-sm font-bold uppercase' style={{'color' : `${fitColors[value]}`}}>
             {value}
           </div>
         ),
@@ -49,7 +51,9 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'intent',
         Cell: ({ value }) => (
-          <div className='text-center'>{value}</div>
+          <div className='text-center'>
+            <IntentIndicators value={value}/>
+          </div>
         ),
       },
       {
@@ -58,55 +62,56 @@ const Dashboard = ({ data }) => {
         ),
         accessor: 'lastSeen',
         Cell: ({ value }) => (
-          <div className='text-center'>{`${value} days ago`}</div>
+          <div className='text-xs text-center'>{`${value} days ago`}</div>
         ),
       },
       {
         Header: (
-          <div className='text-gray-600 uppercase text-center'>
+          <div className='text-gray-600 uppercase'>
             Session Time
           </div>
         ),
         accessor: 'sessionMins',
         Cell: ({ value, row }) => (
-          <div className='text-center'>
-            {value}
+          <div className='text-xs text-right mr-6'>
+            {value} minutes
             <br />
-            <span className='text-gray-400'>{row.original.sessionPages}</span>
+            <span className='text-gray-400'>{row.original.sessionPages} pages</span>
           </div>
         ),
       },
       {
         Header: (
-          <div className='text-gray-600 uppercase text-center'>
+          <div className='text-gray-600 text-left uppercase'>
             Activity (Week)
           </div>
         ),
         accessor: 'weeklyActivity',
         Cell: ({ value }) => (
-          <div className='text-center'>
-            {/* Add your activity graph here */}
-            {/* For example, you can use a charting library like Chart.js */}
+          <div className='md:w-[8rem]'>
+            <ActivityGraph data={value}/>
           </div>
         ),
       },
       {
         Header: (
-          <div className='text-gray-600 uppercase text-left'>
+          <div className=' text-gray-600 uppercase text-left'>
             Intent Signals
           </div>
         ),
         accessor: 'intentSignals',
         Cell: ({ value }) => (
-          <div className='text-center'>
-            {value.map((signal, idx) => (
-              <div key={idx} className='flex items-center'>
-                <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
-                <span className='ml-2'>{Object.keys(signal)[0]}</span>
-                <span className='ml-2 text-gray-400'>{Object.values(signal)[0]}</span>
-              </div>
-            ))}
-          </div>
+            <div className='md:w-[14rem] h-full text-center'>
+                {value.map((signal, idx) => (
+                <div key={idx} className='flex justify-between items-center py-1'>
+                    <div className='flex items-center'>
+                        <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
+                        <span className='ml-1'>{Object.keys(signal)[0]}</span>
+                    </div>
+                        <span className='text-gray-400'>{Object.values(signal)[0]} days ago</span>
+                </div>
+                ))}
+            </div>
         ),
       },
     ],
@@ -142,18 +147,18 @@ const Dashboard = ({ data }) => {
         <button className='bg-gray-200 px-2 py-1 mr-2'>+ Filter</button>
         <span className='border-r border-gray-300'></span>
         <span className='border-l border-gray-300 mr-2'></span>
-        <div className='inline text-purple-600 bg-blue-100 px-2 py-1'>
-          <button>Past Week</button>
+        <button className='inline text-purple-600 bg-blue-100 px-2 py-1'>
+          <span>Past Week</span>
           <FontAwesomeIcon className='ml-1 text-xs' icon={faChevronDown} />
-        </div>
+        </button>
       </div>
-      <div className='overflow-x-hidden'>
+      <div className='md:overflow-x-hidden overflow'>
         <table className='w-full text-xs border-collapse mt-4 ml-4' {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()} className='text-xs text-gray-600 uppercase'>
+                  <th {...column.getHeaderProps()}>
                     {column.render('Header')}
                   </th>
                 ))}
