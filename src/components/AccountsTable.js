@@ -4,7 +4,7 @@ import ActivityGraph from './ActivityGraph';
 import { useTable } from 'react-table';
 import Image from 'next/image';
 
-const AccountsTable = ({data, isLoading, error}) => {
+const AccountsTable = ({data}) => {
     const fitColors = {
         a: '#5E02F5',
         b: '#8952E3',
@@ -127,13 +127,13 @@ const AccountsTable = ({data, isLoading, error}) => {
         data: data || [],
     })
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
+    // if (isLoading) {
+    //     return <div>Loading...</div>
+    // }
     
-    if (error) {
-        return <div>Error</div>
-    }
+    // if (error) {
+    //     return <div>Error</div>
+    // }
 
   return (
     <div className='md:overflow-x-hidden overflow-x-auto'>

@@ -6,18 +6,18 @@ import { useQuery } from 'react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const Dashboard = () => {
+const Dashboard = ({data}) => {
   const fetchData = async () => {
     const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
     console.log(response)
     return response.json();
   }
 
-  const { data, isLoading, error } = useQuery('accounts-table', fetchData, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
-  });
+//   const { data, isLoading, error } = useQuery('accounts-table', fetchData, {
+//     refetchOnMount: false,
+//     refetchOnWindowFocus: false,
+//     staleTime: Infinity,
+//   });
 
   return (
     <main>
@@ -41,7 +41,8 @@ const Dashboard = () => {
           <FontAwesomeIcon className='ml-1 text-xs' icon={faChevronDown} />
         </button>
       </div>
-      <AccountsTable data={data} isLoading={isLoading} error={error}/>
+      {/* <AccountsTable data={data} isLoading={isLoading} error={error}/> */}
+      <AccountsTable data={data}/>
     </main>
   );
 };
