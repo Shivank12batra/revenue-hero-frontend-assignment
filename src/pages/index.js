@@ -13,8 +13,9 @@ export default function Home({data}) {
 
 export async function getServerSideProps() {
   // Fetch data from the separate API route
-  const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
-  const data = await response.json();
+  // const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
+  // const data = await response.json();
+  const data = generateRandomDataArray(25);
   return {
     props: {
       data,
