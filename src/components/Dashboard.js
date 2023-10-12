@@ -13,7 +13,11 @@ const Dashboard = () => {
     return response.json();
   }
 
-  const {data, isLoading, error} = useQuery('accounts-table', fetchData)
+  const { data, isLoading, error } = useQuery('accounts-table', fetchData, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
 
   return (
     <main>
