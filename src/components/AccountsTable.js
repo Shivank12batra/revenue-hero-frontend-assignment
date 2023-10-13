@@ -23,7 +23,8 @@ const AccountsTable = ({data}) => {
             accessor: 'name',
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
-                  <Image className='rounded-lg' src={row.original.img} alt={`${row.original.name}_logo`} width={60} height={40} loading="eager"/>
+                {console.log(row.index)}
+                <Image className='rounded-lg' src={row.original.img} alt='company_logo' width={60} height={40} loading={`${row.index < 5 ? 'eager' : 'lazy'}`}/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
                   <br />
@@ -104,7 +105,7 @@ const AccountsTable = ({data}) => {
                     <div key={idx} className='flex justify-between items-center py-1'>
                         <div className='flex items-center'>
                             <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
-                            <span className='ml-1'>{Object.keys(signal)[0]}</span>                                                                                                                                                                                                  
+                            <span className='ml-1'>{Object.keys(signal)[0]}</span>                                      
                         </div>
                             <span className='text-gray-400'>{Object.values(signal)[0]} days ago</span>
                     </div>
