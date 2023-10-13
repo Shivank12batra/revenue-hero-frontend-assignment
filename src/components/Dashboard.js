@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = ({data}) => {
-  const fetchData = async () => {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
-    console.log(response)
-    return response.json();
-  }
+//   const fetchData = async () => {
+//     const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
+//     console.log(response)
+//     return response.json();
+//   }
 
 //   const { data, isLoading, error } = useQuery('accounts-table', fetchData, {
 //     refetchOnMount: false,

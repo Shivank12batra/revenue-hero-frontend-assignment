@@ -1,8 +1,12 @@
 import React from 'react';
 import IntentIndicators from './IntentIndicators';
-import ActivityGraph from './ActivityGraph';
 import { useTable } from 'react-table';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+const ActivityGraph = dynamic(() => import('./ActivityGraph'), {
+    loading: () => <p>Loading...</p>,
+    ssr: false,
+  })
 
 const AccountsTable = ({data}) => {
     const fitColors = {
@@ -24,7 +28,7 @@ const AccountsTable = ({data}) => {
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
                 {console.log(row.index)}
-                <Image className='rounded-lg' src={row.original.img} alt='company_logo' width={60} height={40} loading={`${row.index < 5 ? 'eager' : 'lazy'}`}/>
+                <Image className='rounded-lg' loading={`${row.index < 5 ? 'eager' : 'lazy'}`} src={row.original.img} alt='company_logo' width={60} height={40}/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
                   <br />
