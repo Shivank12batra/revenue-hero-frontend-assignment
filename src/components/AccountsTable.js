@@ -92,7 +92,8 @@ const AccountsTable = ({data}) => {
             accessor: 'weeklyActivity',
             Cell: ({ value }) => (
               <div className=' ml-4 w-[150px]'>
-                <ActivityGraph data={value}/>
+                {value}
+                {/* <ActivityGraph data={value}/> */}
               </div>
             ),
           },

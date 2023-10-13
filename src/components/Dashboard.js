@@ -1,6 +1,4 @@
 import React from 'react';
-import IntentIndicators from './IntentIndicators';
-import ActivityGraph from './ActivityGraph';
 import AccountsTable from './AccountsTable';
 import { useQuery } from 'react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
