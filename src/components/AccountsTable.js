@@ -23,7 +23,7 @@ const AccountsTable = ({data}) => {
             accessor: 'name',
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
-                  <Image className='rounded-lg' src={row.original.img} alt={`${row.original.name}_logo`} width={60} height={40} />
+                  <Image className='rounded-lg' src={row.original.img} alt={`${row.original.name}_logo`} width={60} height={40} loading="eager"/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
                   <br />
