@@ -24,7 +24,7 @@ const AccountsTable = ({data}) => {
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
                 {console.log(row.index)}
-                <Image className='rounded-lg' src={row.original.img} alt='company_logo' width={60} height={40} loading={`${row.index < 5 ? 'eager' : 'lazy'}`}/>
+                <Image className='rounded-lg' src={row.original.img} alt='company_logo' width={60} height={40} loading={`${row.index < 0 ? 'eager' : 'lazy'}`}/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
                   <br />
