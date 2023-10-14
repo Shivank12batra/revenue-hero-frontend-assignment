@@ -3,12 +3,14 @@ import IntentIndicators from './IntentIndicators';
 import { useTable } from 'react-table';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-const ActivityGraph = dynamic(() => import('./ActivityGraph'), {
-    loading: () => <p>Loading...</p>,
-    ssr: false,
-  })
+// const ActivityGraph = dynamic(() => import('./ActivityGraph'), {
+//     loading: () => <p>Loading...</p>,
+//     ssr: false,
+//   })
+const ActivityGraph = React.lazy(() => import('../components/ActivityGraph'));
+// import ActivityGraph from './ActivityGraph';
 
-const AccountsTable = ({data}) => {
+const AccountsTable = ({data, isLoading, error}) => {
     const fitColors = {
         a: '#5E02F5',
         b: '#8952E3',
@@ -28,7 +30,7 @@ const AccountsTable = ({data}) => {
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
                 {console.log(row.index)}
-                <Image className='rounded-lg' loading={`${row.index < 5 ? 'eager' : 'lazy'}`} src={row.original.img} alt='company_logo' width={60} height={40}/>
+                <Image className='rounded-lg' alt='company_logo' src={row.original.img} loading={`${row.index > 5 ? 'eager' : 'lazy'}`} width={60} height={40}/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
                   <br />
@@ -133,13 +135,13 @@ const AccountsTable = ({data}) => {
         data: data || [],
     })
 
-    // if (isLoading) {
-    //     return <div>Loading...</div>
-    // }
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
     
-    // if (error) {
-    //     return <div>Error</div>
-    // }
+    if (error) {
+        return <div>Error</div>
+    }
 
   return (
     <div className='md:overflow-x-hidden overflow-x-auto'>
