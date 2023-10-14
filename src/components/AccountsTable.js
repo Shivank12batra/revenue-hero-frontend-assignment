@@ -7,10 +7,10 @@ import dynamic from 'next/dynamic';
 //     loading: () => <p>Loading...</p>,
 //     ssr: false,
 //   })
-const ActivityGraph = React.lazy(() => import('../components/ActivityGraph'));
-// import ActivityGraph from './ActivityGraph';
+// const ActivityGraph = React.lazy(() => import('../components/ActivityGraph'));
+import ActivityGraph from './ActivityGraph';
 
-const AccountsTable = ({data, isLoading, error}) => {
+const AccountsTable = ({data}) => {
     const fitColors = {
         a: '#5E02F5',
         b: '#8952E3',
@@ -29,7 +29,6 @@ const AccountsTable = ({data, isLoading, error}) => {
             accessor: 'name',
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
-                {console.log(row.index)}
                 <Image className='rounded-lg' alt='company_logo' src={row.original.img} loading={`${row.index > 5 ? 'eager' : 'lazy'}`} width={60} height={40}/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
@@ -94,14 +93,13 @@ const AccountsTable = ({data, isLoading, error}) => {
             accessor: 'weeklyActivity',
             Cell: ({ value }) => (
               <div className=' ml-4 w-[150px]'>
-                {value}
-                {/* <ActivityGraph data={value}/> */}
+                <ActivityGraph data={value}/>
               </div>
             ),
           },
           {
             Header: (
-              <div className=' text-gray-600 uppercase text-left'>
+              <div className='text-gray-600 uppercase text-left'>
                 Intent Signals
               </div>
             ),
@@ -135,13 +133,13 @@ const AccountsTable = ({data, isLoading, error}) => {
         data: data || [],
     })
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
+    // if (isLoading) {
+    //     return <div>Loading...</div>
+    // }
     
-    if (error) {
-        return <div>Error</div>
-    }
+    // if (error) {
+    //     return <div>Error</div>
+    // }
 
   return (
     <div className='md:overflow-x-hidden overflow-x-auto'>

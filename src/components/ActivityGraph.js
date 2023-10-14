@@ -1,8 +1,36 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 
 const ActivityGraph = ({ data }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const activityGraphRef = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      root: null, // Adjust this to be a horizontal-scrolling container
+      rootMargin: '0px 0px 0px 0px', // No vertical margin, adjust left/right margin
+      threshold: 0.1, // Adjust this threshold as needed
+    };
+
+    const handleIntersection = (entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (activityGraphRef.current) {
+      observer.observe(activityGraphRef.current);
+    }
+
+    return () => {
+      if (activityGraphRef.current) {
+        observer.unobserve(activityGraphRef.current);
+      }
+    };
+  }, []);
   const chartData = {
     labels: Array.from({ length: 7 }, (_, index) => `Day ${index + 1}`),
     datasets: [
@@ -41,8 +69,8 @@ const ActivityGraph = ({ data }) => {
   
 
   return (
-    <div className="w-full h-8">
-      <Line data={chartData} options={chartOptions} />
+    <div className="w-full h-8" ref={activityGraphRef}>
+      {isVisible && <Line data={chartData} options={chartOptions} />}
     </div>
   );
 };
