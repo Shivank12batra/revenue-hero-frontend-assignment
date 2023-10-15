@@ -2,7 +2,7 @@
 
 I have replicated Koala's accounts dashboard with full responsiveness with a key focus on performance, specifically the initial load time.
 
-![Webapp Look](https://imgur.com/lO3aduc)
+![Webapp Look](https://i.imgur.com/lO3aduc.jpg)
 
 Live Link: [https://get-koala.vercel.app/](https://get-koala.vercel.app/)
 
