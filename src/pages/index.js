@@ -11,10 +11,7 @@ export default function Home({data}) {
   );
 }
 
-export async function getStaticProps() {
-  // Fetch data from the separate API route
-  // const response = await fetch(process.env.NEXT_PUBLIC_API_KEY);
-  // const data = await response.json();
+export async function getServerSideProps() {
   const data = generateRandomDataArray(25);
   return {
     props: {
