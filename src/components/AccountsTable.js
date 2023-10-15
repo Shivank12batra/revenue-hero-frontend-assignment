@@ -1,16 +1,10 @@
 import React from 'react';
 import IntentIndicators from './IntentIndicators';
-import { useTable } from 'react-table';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-// const ActivityGraph = dynamic(() => import('./ActivityGraph'), {
-//     loading: () => <p>Loading...</p>,
-//     ssr: false,
-//   })
-// const ActivityGraph = React.lazy(() => import('../components/ActivityGraph'));
 import ActivityGraph from './ActivityGraph';
+import { useTable, usePagination } from 'react-table';
+import Image from 'next/image';
 
-const AccountsTable = ({data}) => {
+const AccountsTable = ({filteredData}) => {
     const fitColors = {
         a: '#5E02F5',
         b: '#8952E3',
@@ -29,7 +23,7 @@ const AccountsTable = ({data}) => {
             accessor: 'name',
             Cell: ({ row }) => (
               <div className='md:w-[400px] min-w-[300px] flex items-center ml-4'>
-                <Image className='rounded-lg' alt='company_logo' src={row.original.img} loading={`${row.index > 5 ? 'eager' : 'lazy'}`} width={60} height={40}/>
+                <Image className='rounded-lg' alt='company_logo' src={row.original.img} loading={`${row.index < 5 ? 'eager' : 'lazy'}`} width={60} height={40}/>
                 <div className='ml-2 text-left'>
                     <span className='text-sm font-semibold'>{row.original.name}</span>
                   <br />
@@ -119,27 +113,27 @@ const AccountsTable = ({data}) => {
             ),
           },
         ],
-        [data]
+        [filteredData]
     )
 
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        page,
         prepareRow,
-      } = useTable({
-        columns,
-        data: data || [],
-    })
-
-    // if (isLoading) {
-    //     return <div>Loading...</div>
-    // }
-    
-    // if (error) {
-    //     return <div>Error</div>
-    // }
+        previousPage,
+        nextPage,
+        canPreviousPage,
+        canNextPage,
+      } = useTable(
+        {
+          columns,
+          data: filteredData || [],
+          initialState: { pageIndex: 0, pageSize: 10 }, // Initial page index and size
+        },
+        usePagination
+      );
 
   return (
     <div className='md:overflow-x-hidden overflow-x-auto'>
@@ -156,20 +150,41 @@ const AccountsTable = ({data}) => {
             ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-                prepareRow(row);
-                return (
-                <tr key={row.id} className='border-b border-gray-200' {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                    <td key={cell.column.id} className='py-2' {...cell.getCellProps()}>
-                        {cell.render('Cell')}
-                    </td>
-                    ))}
-                </tr>
-                );
-            })}
+                {page.map((row) => {
+                    prepareRow(row);
+                    return (
+                    <tr key={row.id} className='border-b border-gray-200' {...row.getRowProps()}>
+                        {row.cells.map((cell) => (
+                        <td key={cell.column.id} className='py-2' {...cell.getCellProps()}>
+                            {cell.render('Cell')}
+                        </td>
+                        ))}
+                    </tr>
+                    );
+                })}
             </tbody>
         </table>
+        {/* page control buttons */}
+        <div className='my-4 flex justify-center items-center text-xs'>
+            <button
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+                className={`${
+                !canPreviousPage ? 'bg-gray-300 text-gray-500  cursor-not-allowed' : 'bg-blue-100 text-purple-500'
+                } px-2 py-1`}
+            >
+                Prev
+            </button>{' '}
+            <button
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+                className={`${
+                !canNextPage ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-blue-100 text-purple-500'
+                } px-2 py-1`}
+            >
+                Next
+            </button>
+        </div>
     </div>
   )
 }

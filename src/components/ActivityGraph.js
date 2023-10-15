@@ -6,11 +6,12 @@ const ActivityGraph = ({ data }) => {
   const [isVisible, setIsVisible] = useState(false);
   const activityGraphRef = useRef(null);
 
+  // lazy load ActivityGraph for horizontal scroll on mobile screens
   useEffect(() => {
     const options = {
-      root: null, // Adjust this to be a horizontal-scrolling container
-      rootMargin: '0px 0px 0px 0px', // No vertical margin, adjust left/right margin
-      threshold: 0.1, // Adjust this threshold as needed
+      root: null,
+      rootMargin: '0px 0px 0px 0px',
+      threshold: 0.1,
     };
 
     const handleIntersection = (entries) => {

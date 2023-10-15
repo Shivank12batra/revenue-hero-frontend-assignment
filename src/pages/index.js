@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar";
 import Dashboard from "@/components/Dashboard";
-import { generateRandomDataArray } from "@/randomData";
+import { generateRandomDataArray } from "@/utils/randomData";
 
 export default function Home({data}) {
   return (
